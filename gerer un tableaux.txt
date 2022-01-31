@@ -1,0 +1,24 @@
+ORG 100h
+
+.data
+
+tab DB 34,72,48,32,56,12,8,9,45,63,80,-1
+
+.code
+LEA BX,tab
+MOV DI,0
+
+while: CMP [BX+DI],-1
+JE fin
+MOV AX,0
+MOV AL,[BX+DI]
+MOV DL,9
+DIV DL
+CMP AH,0
+JE fin
+INC DI
+JMP while
+
+
+fin: MOV BX,DI
+RET

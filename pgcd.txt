@@ -1,0 +1,35 @@
+
+org 100h
+.data
+x dw 10
+y dw 15
+
+
+.code
+push x
+push y
+
+call pgcd
+add sp,4; por liberer espace des var depiler
+ret
+
+pgcd proc
+push bp
+mov bp,sp
+mov cx,ss:[bp+4];recuperer y
+mov dx,ss:[bp+6];recuoere  valeur de x
+while:
+cmp dx,cx
+ja if
+jb else
+je stop
+if:
+sub dx,cx
+jmp while
+else:
+sub cx,dx
+jmp while
+stop:
+pop bp
+ret
+pgcd endp

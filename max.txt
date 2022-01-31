@@ -1,0 +1,23 @@
+ORG 100h
+
+.data
+tab DB 12,9,70,60,59,-1
+max DB 0
+
+.code
+LEA BX,tab
+MOV SI,0
+
+
+while: CMP [BX+SI],-1
+JE fin
+MOV AL,B.[BX+SI]
+CMP max,AL
+JA else
+
+MOV max,AL
+
+else: INC SI
+JMP while
+
+fin: RET

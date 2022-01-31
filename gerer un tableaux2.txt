@@ -1,0 +1,26 @@
+org 100h
+        .DATA
+        STR DB 34, 72, 48,32, 56, 12, 8, 9, 45, 63, 80,-1
+        .CODE
+mov DX,0 
+ MOV CL,9
+MOV SI,0
+LEA BX,STR
+WHILE: MOV AX,[BX+SI]
+       cmp AX,-1
+       JE FI
+       
+        DIV AX
+         
+        CMP AH,0
+        ;JE FIN
+        
+        INC SI
+      
+      JMP WHILE
+      
+  
+  FIN:MOV DX,[BX+SI]
+      
+
+ FI:RET

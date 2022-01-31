@@ -1,0 +1,39 @@
+org 100h
+1. la multiplication 15 20 sur 8 bits ;
+MOV AL,15
+MOV BL,20
+MUL BL ;==> AX=AL*BL
+
+;2. la multiplication 15 -20 sur 8 bits ;
+MOV AL,15
+MOV BL,-20
+IMUL BL ;==> AX=AL*BL
+
+;3. la multiplication 115 -10 sur 8 bits ;
+MOV AL,115
+MOV BL,-10
+IMUL BL ;==> AX=AL*BL
+
+;4. la multiplication 115 -10 sur 16 bits ;
+MOV AX,115
+MOV BX,-10
+IMUL BX ;==> (AX,DX)=AX*BX
+
+
+;5. la division 93 / 3 sur 8 bits ;
+MOV AX,93
+MOV BL,3
+DIV BL; Q:AL ET R:AH
+
+;6. la division 520 / -10 sur 8 bits ;
+MOV AX,520
+MOV BL,-10
+IDIV BL; Q:AL ET R:AH
+
+;7. la division 520 / -10 bits sur 16 bits.
+MOV AX,-520
+MOV DX,0FFFFH
+MOV BX,10
+IDIV BX; (AX,DX)/BX ==> Q:AX ET R:DX
+;F000 FDF8 /0A
+

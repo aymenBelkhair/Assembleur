@@ -1,0 +1,58 @@
+org 100h
+.data
+isPremierVar db ?
+tab DW 4, 8, 16, 3, 1, 7, 12, 3, 9, 17,-1
+nbrPremier db 0
+
+
+.code
+
+call fctMain
+jmp end
+
+isPremier proc
+PUSH BP
+MOV BP , SP
+; CODE DE LA FONCTION
+MOV CX,SS:[BP+4]
+CMP CX,1
+JE isFalse
+DEC CX
+BCL:MOV AX , SS:[BP+4]
+DIV CL
+CMP AH,0
+LOOPNE BCL
+CMP CX,0
+JE isTrue
+JNE isFalse
+isTrue: MOV isPremierVar,1
+JMP endIsPremier
+isFalse: MOV isPremierVar,0
+JMP endIsPremier
+
+
+endIsPremier: POP BP
+RET
+isPremier endp
+
+
+
+fctMain proc
+LEA BX,tab
+FOR:CMP [BX],-1
+JE endMain
+PUSH [BX]
+CALL isPremier
+ADD sp,2
+CMP isPremierVar,1
+JE incNbrPrem
+JNE continu
+
+incNbrPrem: INC nbrPremier
+continu: ADD BX,2
+JMP FOR
+
+endMain: RET
+fctMain endp
+
+end: ret
